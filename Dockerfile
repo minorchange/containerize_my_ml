@@ -14,7 +14,7 @@ COPY ./  ./
 RUN pip3 install -r requirements.txt
 
 
-WORKDIR /home/src/containerize-my-ml
+WORKDIR /home/src/containerize_my_ml
 # install requirements for containerization
 RUN pip3 install -r requirements.txt
 
