@@ -15,7 +15,9 @@ def load_module_from_path(path_to_py_file):
 
 
 def check_if_containerizeconfig_exists(containerize_config_path):
-    assert isfile(containerize_config_path)
+    assert isfile(
+        containerize_config_path
+    ), f"{containerize_config_path} does not point to a file."
 
 
 # def check_if_containerizeconfig_looks_as_expected(containerize_config_path):
@@ -80,7 +82,6 @@ def load_dummy_model_path_and_name():
 def find_model_path_and_name():
     try:
         m_path_abs, m_name = load_primary_model_path_and_name()
-        assert False
     except Exception as e:
         print("Could not load primary model")
         print(e.__repr__())
