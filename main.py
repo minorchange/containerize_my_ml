@@ -19,3 +19,21 @@ def predict(param1: str):
     y = m.predict(param1)
 
     return {"prediction": y}
+
+# @app.put("/set_model_param/{param1}")
+# def predict(param1: str):
+#     y = m.predict(param1)
+
+#     return {"prediction": y}
+
+
+# class Item(BaseModel):
+#     param_name: str | None
+#     param_value: str | None
+    
+
+# @app.put("/set_model_param/{item_id}", response_model=Item)
+# async def update_item(item_id: str, item: Item):
+#     update_item_encoded = jsonable_encoder(item)
+#     items[item_id] = update_item_encoded
+#     return update_item_encoded
