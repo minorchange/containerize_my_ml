@@ -11,3 +11,6 @@ class dummy_model:
 
     def predict(self, X):
         return 24
+
+    def add_context(self, c):
+        pass
