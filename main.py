@@ -24,3 +24,9 @@ def predict(param1: str):
 def add_context(c: Context):
     m.add_context(c)
     return f"context {c.context_name} added."
+
+
+@app.get("/get_context/{context_name}")
+def add_context(context_name: str):
+    c = m.get_context(context_name)
+    return f"Current Context {context_name}:\n{c}"
