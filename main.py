@@ -32,7 +32,7 @@ def get_context(context_name: str):
     return f"Current Context {context_name}: {c}"
 
 
-@app.detete("/clear_context/{context_name}")
+@app.delete("/clear_context/{context_name}")
 def clear_context(context_name: str):
     msg = m.clear_context(context_name)
     if msg is None:
