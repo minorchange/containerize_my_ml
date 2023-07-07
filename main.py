@@ -27,6 +27,14 @@ def add_context(c: Context):
 
 
 @app.get("/get_context/{context_name}")
-def add_context(context_name: str):
+def get_context(context_name: str):
     c = m.get_context(context_name)
-    return f"Current Context {context_name}:\n{c}"
+    return f"Current Context {context_name}: {c}"
+
+
+@app.detete("/clear_context/{context_name}")
+def clear_context(context_name: str):
+    msg = m.clear_context(context_name)
+    if msg is None:
+        msg = ""
+    return f"Context {context_name}  cleared. {msg}"
