@@ -1,8 +1,6 @@
 from fastapi import Body, FastAPI, Request
 from containerizable_model import containerizable_model
 from find_model import find_and_load_model, inspect_model_instance
-from pydantic import BaseModel
-import inspect
 
 
 app = FastAPI()
@@ -32,3 +30,17 @@ def predict(x: m_info["pred_arg_type"]):
 def add_context(c: m_info["addc_arg_type"]):
     m.add_context(c)
     return f"context {c.context_name} added."
+
+
+@app.get("/get_context/{context_name}")
+def get_context(context_name: str):
+    c = m.get_context(context_name)
+    return f"Current Context {context_name}: {c}"
+
+
+@app.delete("/clear_context/{context_name}")
+def clear_context(context_name: str):
+    msg = m.clear_context(context_name)
+    if msg is None:
+        msg = ""
+    return f"Context {context_name}  cleared. {msg}"
