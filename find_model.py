@@ -106,7 +106,9 @@ def get_custom_members_from_class(c):
     return custom_members
 
 
-def check_if_model_class_looks_as_expected(model_class):
+def check_if_model_has_at_least_all_memberfunctions_that_the_refernce_containerizable_model_has(
+    model_class,
+):
     from containerizable_model import containerizable_model
 
     containerizable_members = get_custom_members_from_class(containerizable_model)
@@ -120,12 +122,59 @@ def check_if_model_class_looks_as_expected(model_class):
         ), f"Expecting the functions {containerizable_m_names} in the loaded model"
 
 
+def check_predict_arg(model_class):
+    fas = inspect.getfullargspec(model_class.__dict__["predict"])
+    assert fas.args[0] == "self"
+    assert len(fas.args) == 2, f"Only one argument expexted. Got {len(fas.args)-1}."
+    arg_name = fas.args[1]
+    assert (
+        arg_name in fas.annotations
+    ), f"Expecting type annotations for the argument for predict: {arg_name}"
+
+
+def check_add_context_arg(model_class):
+    fas = inspect.getfullargspec(model_class.__dict__["add_context"])
+    assert fas.args[0] == "self"
+    assert len(fas.args) == 2, f"Only one argument expexted. Got {len(fas.args)-1}."
+    arg_name = fas.args[1]
+    assert (
+        arg_name in fas.annotations
+    ), f"Expecting type annotations for the argument for predict: {arg_name}"
+
+
+def check_if_model_class_looks_as_expected(model_class):
+    check_if_model_has_at_least_all_memberfunctions_that_the_refernce_containerizable_model_has(
+        model_class
+    )
+    check_predict_arg(model_class)
+    check_add_context_arg(model_class)
+
+
 def find_and_load_model():
     m_path_abs, m_name = find_model_path_and_name()
     model_module = load_module_from_path(m_path_abs)
     model_class = getattr(model_module, m_name)
     check_if_model_class_looks_as_expected(model_class)
     return model_class
+
+
+def inspect_model_instance(model_instance):
+    pred_fas = inspect.getfullargspec(model_instance.predict)
+    pred_arg_name = pred_fas.args[1]
+    pred_arg_type = pred_fas.annotations[pred_arg_name]
+
+    addc_fas = inspect.getfullargspec(model_instance.add_context)
+    addc_arg_name = addc_fas.args[1]
+    addc_arg_type = addc_fas.annotations[addc_arg_name]
+
+    model_info = {
+        "pred_arg_name": pred_arg_name,
+        "pred_arg_type": pred_arg_type,
+        "addc_arg_name": addc_arg_name,
+        "addc_arg_type": addc_arg_type,
+    }
+
+    return model_info
 
 
 # mc = find_and_load_model()
