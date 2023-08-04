@@ -109,7 +109,7 @@ def get_custom_members_from_class(c):
 def check_if_model_has_at_least_all_memberfunctions_that_the_minimal_containerizable_model_has(
     model_class,
 ):
-    from containerize_my_ml.minimal_containerizable_model import containerizable_model
+    from minimal_containerizable_model import containerizable_model
 
     containerizable_members = get_custom_members_from_class(containerizable_model)
     containerizable_m_names = [m[0] for m in containerizable_members]
