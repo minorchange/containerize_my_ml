@@ -23,6 +23,4 @@ class containerizable_model:
 
     def predict(self, x: PredictArgDummyModel):
         return 24
-
-    def add_context(self, c: ContextDummy):
-        pass
+    

@@ -106,10 +106,10 @@ def get_custom_members_from_class(c):
     return custom_members
 
 
-def check_if_model_has_at_least_all_memberfunctions_that_the_refernce_containerizable_model_has(
+def check_if_model_has_at_least_all_memberfunctions_that_the_minimal_containerizable_model_has(
     model_class,
 ):
-    from containerizable_model import containerizable_model
+    from containerize_my_ml.minimal_containerizable_model import containerizable_model
 
     containerizable_members = get_custom_members_from_class(containerizable_model)
     containerizable_m_names = [m[0] for m in containerizable_members]
@@ -132,8 +132,8 @@ def check_predict_arg(model_class):
     ), f"Expecting type annotations for the argument for predict: {arg_name}"
 
 
-def check_add_context_arg(model_class):
-    fas = inspect.getfullargspec(model_class.__dict__["add_context"])
+def check_set_context_arg(model_class):
+    fas = inspect.getfullargspec(model_class.__dict__["set_context"])
     assert fas.args[0] == "self"
     assert len(fas.args) == 2, f"Only one argument expexted. Got {len(fas.args)-1}."
     arg_name = fas.args[1]
@@ -143,11 +143,11 @@ def check_add_context_arg(model_class):
 
 
 def check_if_model_class_looks_as_expected(model_class):
-    check_if_model_has_at_least_all_memberfunctions_that_the_refernce_containerizable_model_has(
+    check_if_model_has_at_least_all_memberfunctions_that_the_minimal_containerizable_model_has(
         model_class
     )
     check_predict_arg(model_class)
-    check_add_context_arg(model_class)
+    check_set_context_arg(model_class)
 
 
 def find_and_load_model():
@@ -163,15 +163,15 @@ def inspect_model_instance(model_instance):
     pred_arg_name = pred_fas.args[1]
     pred_arg_type = pred_fas.annotations[pred_arg_name]
 
-    addc_fas = inspect.getfullargspec(model_instance.add_context)
-    addc_arg_name = addc_fas.args[1]
-    addc_arg_type = addc_fas.annotations[addc_arg_name]
+    setc_fas = inspect.getfullargspec(model_instance.set_context)
+    setc_arg_name = setc_fas.args[1]
+    setc_arg_type = setc_fas.annotations[setc_arg_name]
 
     model_info = {
         "pred_arg_name": pred_arg_name,
         "pred_arg_type": pred_arg_type,
-        "addc_arg_name": addc_arg_name,
-        "addc_arg_type": addc_arg_type,
+        "setc_arg_name": setc_arg_name,
+        "setc_arg_type": setc_arg_type,
     }
 
     return model_info
