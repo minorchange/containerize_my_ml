@@ -18,4 +18,7 @@ WORKDIR /home/src/containerize_my_ml
 # install requirements for containerization
 RUN pip3 install -r requirements.txt
 
+# cache the model if applicable
+RUN python -c "from find_model import find_and_load_model as m; m()().cache_model()"
+
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]

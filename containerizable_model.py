@@ -26,3 +26,6 @@ class containerizable_model:
 
     def add_context(self, c: ContextDummy):
         pass
+
+    def cache_model(self):
+        pass
