@@ -1,4 +1,4 @@
-# Cintainerize my ML model
+# Containerize my ML model
 
 Remember: in case you change the Pipfile: recreate requirements.txt via `pipenv requirements >> requirements.txt` (We want to use just pip in the container)
 Use this as a submodule in your repo that defines the model (modelrepo).
