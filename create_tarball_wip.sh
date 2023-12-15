@@ -39,7 +39,4 @@ create_tarball(){
     fi
 }
 
-# create_tarball $NER_IMG_NAME $NER_VERSION ../ner cleanup
-# create_tarball $NER_IMG_NAME $NER_VERSION ../aa-ml-named-entity-recognition cleanup
-create_tarball $SUM_IMG_NAME $SUM_VERSION ../aa-ml-summarize cleanup
-# create_tarball $ZSC_IMG_NAME $ZSC_VERSION ../aa-ml-zsclassification cleanup
+create_tarball $ZSC_IMG_NAME $ZSC_VERSION ../path_to_containerize_paren_folder cleanup
