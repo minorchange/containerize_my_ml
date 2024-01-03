@@ -1,9 +1,6 @@
 #!/bin/bash
 
 
-source create_img_name_and_tag.sh
-
-
 create_tarball(){
     
     img_name=$1
@@ -32,4 +29,4 @@ create_tarball(){
     cd $containerize_my_ml_path
 }
 
-create_tarball $(create_img_name) $(create_img_tag) cleanup
+create_tarball $(bash img_name.sh) $(bash img_tag.sh) cleanup
