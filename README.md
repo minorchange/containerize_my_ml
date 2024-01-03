@@ -7,7 +7,7 @@ Use this as a submodule in your repo that defines the model (modelrepo).
 modelrepo
 │   ├── containerize_my_ml/
 │   ├── containerizeconfig.yaml
-│   ├── appname.md
+│   ├── appname.md (optional)
 │   ├── other stuff from the modelrepo
 ```
 

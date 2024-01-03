@@ -13,12 +13,6 @@ def read_root():
     return {f"Hi. I am {m.name}"}
 
 
-# @app.get("/predict/{x}")
-# def predict(x: m_info["pred_arg_type"]):
-#     y = m.predict(x)
-#     return {"prediction": y}
-
-
 @app.post("/predict")
 def predict(x: m_info["pred_arg_type"]):
     y = m.predict(x)

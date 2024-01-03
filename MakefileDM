@@ -1,7 +1,0 @@
-# Makefile
-
-v := $(shell source ./myscript.sh && my_function)
-.PHONY: all
-all:
-	@echo $(v)
-	
