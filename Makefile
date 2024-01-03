@@ -1,5 +1,5 @@
-img_name := $(shell source ./create_img_name_and_tag.sh && create_img_name)
-img_tag := $(shell source ./create_img_name_and_tag.sh && create_img_tag)
+img_name := $(shell bash img_name.sh)
+img_tag := $(shell bash img_tag.sh)
 img_refernece := ${img_name}:${img_tag}
 
 
