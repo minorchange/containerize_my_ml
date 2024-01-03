@@ -15,7 +15,7 @@ The containerizeconfig.yaml makes sure the containerize subrepo knows what model
 
 # Build container locally:
 
-Execute this from the modelrepo, not from the containerize_my_ml folder
+Either do `make build_and_run_locally` from the containerize_my_ml folder or execute this from the modelrepo:
 ```
 docker build -f containerize_my_ml/Dockerfile -t nameofmyimage .  
 docker run -it nameofmyimage
@@ -23,10 +23,12 @@ docker run -it nameofmyimage
 
 # Create a tarball containing the build image
 
-To create an automatically named tar file call this from the modelrepo, not from the containerize_my_ml folder:
+Either do `make tarball` from the containerize_my_ml folder or call this from the modelrepo:
 ```
 bash containerize_my_ml/create_tarball.sh
 ```
+
+# Use Tarball
 
 To use this tarball on any machine call:
 ```
