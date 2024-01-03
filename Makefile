@@ -5,6 +5,8 @@ img_refernece := ${img_name}:${img_tag}
 
 .PHONY: tarball
 tarball:
+	@echo "Am Here"
+	echo $(shell pwd)
 	bash create_tarball.sh
 
 .PHONY: build_and_run_locally
