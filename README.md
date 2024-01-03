@@ -7,6 +7,7 @@ Use this as a submodule in your repo that defines the model (modelrepo).
 modelrepo
 │   ├── containerize_my_ml/
 │   ├── containerizeconfig.yaml
+│   ├── appname.md
 │   ├── other stuff from the modelrepo
 ```
 
@@ -18,4 +19,16 @@ Execute this from the modelrepo, not from the containerize_my_ml folder
 ```
 docker build -f containerize_my_ml/Dockerfile -t nameofmyimage .  
 docker run -it nameofmyimage
+```
+
+# Create a tarball containing the build image
+
+To create an automatically named tar file call this from the modelrepo, not from the containerize_my_ml folder:
+```
+bash containerize_my_ml/create_tarball.sh
+```
+
+To use this tarball on any machine call:
+```
+docker load -i INSERT_THE_RESPECTIVE_NAME_HERE.tar.gz
 ```
