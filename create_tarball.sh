@@ -8,7 +8,7 @@ create_tarball(){
     
     img_name=$1
     img_tag=$2
-    cleanup_image_afterwards=$4
+    cleanup_image_afterwards=$3
     
     img_reference="$img_name":"$img_tag"
     containerize_my_ml_path=$(pwd)
