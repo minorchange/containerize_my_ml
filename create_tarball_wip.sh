@@ -2,12 +2,12 @@
 
 
 # Source the .env file
-if [[ -f ../.env ]]; then
-    source ../.env
-else
-    echo "Error: .env file not found"
-    exit 1
-fi
+# if [[ -f ../.env ]]; then
+#     source ../.env
+# else
+#     echo "Error: .env file not found"
+#     exit 1
+# fi
 
 
 create_tarball(){
@@ -39,4 +39,21 @@ create_tarball(){
     fi
 }
 
-create_tarball $ZSC_IMG_NAME $ZSC_VERSION ../path_to_containerize_paren_folder cleanup
+
+get_git_commit_hash() {
+    local commit_hash
+    commit_hash=$(git log -1 --pretty=format:"%h" 2>/dev/null)
+    
+    if [ -n "$commit_hash" ]; then
+        echo "$commit_hash"
+        return 1
+    else
+        return "x"
+    fi
+}
+
+# Example of usage:
+version=$(get_git_commit_hash)-$(date +%Y%m%d%H%M%S)
+echo "Git Commit Hash: $version"
+
+# create_tarball $ZSC_IMG_NAME $ZSC_VERSION ../path_to_containerize_paren_folder cleanup
