@@ -10,4 +10,9 @@ tarball:
 .PHONY: build_and_run_locally
 build_and_run_locally:
 	cd .. && docker build -f containerize_my_ml/Dockerfile -t ${img_refernece} .  
+	syft --scope all-layers -o syft-text ${img_refernece}
 	docker run -it ${img_refernece}
+
+.PHONY: SBOM
+SBOM:
+	cd .. && 
