@@ -53,9 +53,6 @@ class EntitiesOut(BaseModel):
     anonymized_text: str
 
 
-
-
-
 @app.post("/entities", response_model=EntitiesOut)
 def extract_entities(user_request: UserRequestIn):
     text = user_request.text

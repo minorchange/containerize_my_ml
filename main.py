@@ -1,4 +1,4 @@
-from fastapi import Body, FastAPI, Request
+from fastapi import FastAPI
 from find_model import find_and_load_model, inspect_model_instance
 
 

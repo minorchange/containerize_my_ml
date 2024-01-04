@@ -17,5 +17,5 @@ The containerizeconfig.yaml makes sure the containerize subrepo knows what model
 Execute this from the modelrepo, not from the containerize_my_ml folder
 ```
 docker build -f containerize_my_ml/Dockerfile -t nameofmyimage .  
-docker run -it nameofmyimage
+docker run -it nameofmyimage  # (add -p 80:80) if your want to do port forwarding to look at things from your local machine
 ```

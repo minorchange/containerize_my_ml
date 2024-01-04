@@ -10,7 +10,6 @@ sys.path.insert(0, parentdir)
 import inspect
 from os.path import abspath, dirname, join, isfile
 import yaml
-import logging
 import importlib.util
 import sys
 
