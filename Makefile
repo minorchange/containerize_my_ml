@@ -7,6 +7,20 @@ img_refernece := ${img_name}:${img_tag}
 tarball:
 	bash create_tarball.sh
 
+.PHONY: build
+build:
+	cd .. && docker build -f containerize_my_ml/Dockerfile -t ${img_refernece} .  
+	# syft --scope all-layers -o syft-text ${img_refernece}
+
+.PHONY: run_locally
+run_locally:
+	docker run -it ${img_refernece}
+
+.PHONY: bnr
+bnr:
+	$(MAKE) build
+	$(MAKE) run_locally
+
 .PHONY: build_and_run_locally
 build_and_run_locally:
 	cd .. && docker build -f containerize_my_ml/Dockerfile -t ${img_refernece} .  
@@ -23,5 +37,6 @@ vulnerability_scan:
 	sudo trivy image -o sec_scan_${img_refernece}.txt ${img_refernece}
 
 .PHONY: security_scan
-security_scan: SBOM vulnerability_scan
-	@echo "----> Scanning Imgage" ${img_refernece} ...
+security_scan: 
+	$(MAKE) SBOM
+	$(MAKE) vulnerability_scan
