@@ -32,8 +32,8 @@ create_img_tag() {
 	cd ..
 	model_repo_hash=$(get_git_commit_hash)
 	model_repo_tag=$(get_current_git_tag)
-	date=$(date +%y%m%d)
-	version=$model_repo_tag-$model_repo_hash-$containerize_repo_hash-$date
+	# date=$(date +%y%m%d)
+	version=$model_repo_tag-$model_repo_hash-$containerize_repo_hash
 	# go back to saved directory
 	popd > /dev/null
 	echo $version
