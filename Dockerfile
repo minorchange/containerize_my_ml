@@ -1,7 +1,8 @@
 # This is meant to be run from the parent folder in order to be able to include the model stuff:
 # sudo docker build -f containerize/Dockerfile -t mytag . 
 
-FROM python:3.11.7
+# FROM python:3.11.7
+FROM neds-ml-base:1.0.7
 
 RUN apt-get update
 RUN apt-get install -y vim
