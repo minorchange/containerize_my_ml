@@ -33,19 +33,28 @@ def cache_with_max_shard_size(from_pretrained_fu, model_id, custom_model_folder)
     return obj
 
 
-# modelRegex = "huggingface\.co\/(.*)(pytorch_model\.bin$|resolve\/main\/tf_model\.h5$)"
-
-# cachedModels = {}
-# cachedTokenizers = {}
-# for file in cache_folder:
-#     with open(file) as j:
-#         data = json.load(j)
-#         isM = re.search(modelRegex, data["url"])
-#         if isM:
-#             cachedModels[isM.group(1)[:-1]] = file
-#         else:
-#             cachedTokenizers[data["url"].partition("huggingface.co/")[2]] = file
-
-# cachedTokenizers = OrderedDict(sorted(cachedTokenizers.items(), key=lambda k: k[0]))
-
-# print()
+def load_custom_cached_tokenizer_and_model(
+    from_pretr_mod_fu, from_pretr_tok_fu, model_id, custom_model_cache_path
+):
+    try:
+        print("----> Trying to load from file")
+        tokenizer = from_pretr_tok_fu(custom_model_cache_path)
+        model = from_pretr_mod_fu(custom_model_cache_path)
+        print("----> Loaded from file")
+        return model, tokenizer
+    except:
+        print("----> Loading from file did not work")
+        print("----> Loading from web")
+        tokenizer = cache_with_max_shard_size(
+            from_pretrained_fu=from_pretr_tok_fu,
+            model_id=model_id,
+            custom_model_folder=custom_model_cache_path,
+        )
+        model = cache_with_max_shard_size(
+            from_pretrained_fu=from_pretr_mod_fu,
+            model_id=model_id,
+            custom_model_folder=custom_model_cache_path,
+        )
+        clear_model_cache(model_id)
+        print("----> Loaded from web and saved to file")
+        return model, tokenizer
