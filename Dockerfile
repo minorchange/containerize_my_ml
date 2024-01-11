@@ -5,7 +5,8 @@ RUN apt-get install -y vim
 
 WORKDIR /home/src
 
-COPY ./  ./
+# COPY ./  ./
+COPY $(find . -type f ! -name '*.tar.gz') ./
 
 # install requirements for model
 RUN pip3 install --no-cache-dir -r requirements.txt
