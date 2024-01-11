@@ -1,8 +1,4 @@
-# This is meant to be run from the parent folder in order to be able to include the model stuff:
-# sudo docker build -f containerize/Dockerfile -t mytag . 
-
-# FROM python:3.11.7
-FROM neds-ml-base:1.0.7
+FROM neds-base-cupy:1.1.1
 
 RUN apt-get update
 RUN apt-get install -y vim
@@ -12,12 +8,11 @@ WORKDIR /home/src
 COPY ./  ./
 
 # install requirements for model
-RUN pip3 install -r requirements.txt
-
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 WORKDIR /home/src/containerize_my_ml
 # install requirements for containerization
-RUN pip3 install -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 # cache the model if applicable
 RUN python -c "from find_model import find_and_load_model as m; m()().cache_model()"
